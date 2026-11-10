@@ -269,3 +269,5 @@ nav a:hover:after,nav a[aria-current="page"]:after{right:0}
  .gradient-text{animation:none}
  .has-3d-interaction,.has-3d-interaction:hover{transform:none!important;transition:none!important}
 }
+
+.has-3d-interaction{position:relative;isolation:isolate}
