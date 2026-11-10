@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" role="img" aria-labelledby="title desc">
+<title id="title">RIAZ IDEAS neural circuit R</title><desc id="desc">Metallic purple letter R with a glowing multicolour neural circuit core.</desc>
+<defs>
+ <linearGradient id="metal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f4d9ff"/><stop offset=".25" stop-color="#9c62ff"/><stop offset=".52" stop-color="#28105d"/><stop offset=".78" stop-color="#c18aff"/><stop offset="1" stop-color="#351078"/></linearGradient>
+ <linearGradient id="edge" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ff8cff"/><stop offset=".5" stop-color="#8b35ff"/><stop offset="1" stop-color="#31dfff"/></linearGradient>
+ <radialGradient id="brain"><stop stop-color="#fff36c"/><stop offset=".28" stop-color="#f83fba"/><stop offset=".58" stop-color="#5c4cff"/><stop offset="1" stop-color="#14102e"/></radialGradient>
+ <filter id="glow" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<g fill="none" stroke="#9d50ff" stroke-width="4" opacity=".9" filter="url(#glow)">
+ <path d="M34 110 C7 95 12 60 2 44 M38 130 C9 130 10 153 0 170 M45 154 C18 177 18 205 2 220 M57 178 C29 212 40 240 17 266" />
+ <path d="M40 104 C12 78 26 57 8 29 M46 145 C16 144 20 119 3 108" stroke="#24e9ff"/>
+ <path d="M60 188 C30 198 32 227 9 246" stroke="#ff4fd8"/>
+</g>
+<path d="M72 35 H194 Q263 35 263 111 Q263 159 226 178 L292 282 H214 L153 190 H125 V282 H62 V35 Z M125 91 V137 H188 Q203 137 203 114 Q203 91 184 91 Z" fill="url(#metal)" fill-rule="evenodd" stroke="url(#edge)" stroke-width="8" filter="url(#glow)"/>
+<path d="M82 48 H193 Q249 48 249 111 Q249 149 212 166 L270 267 H223 L162 177 H111 V267 H76 V48" fill="none" stroke="#f5c7ff" stroke-width="3" opacity=".8"/>
+<path d="M128 100 Q158 69 187 95 Q218 122 188 150 Q160 173 133 150 Q105 126 128 100Z" fill="url(#brain)" stroke="#35eaff" stroke-width="3" filter="url(#glow)"/>
+<g fill="none" stroke-width="3" stroke-linecap="round" filter="url(#glow)">
+ <path d="M134 112 l20 -14 16 12 17 -8 M126 130 l23 -5 12 18 26 -8 M145 150 l8 -17 22 -3 14 -16" stroke="#35eaff"/>
+ <path d="M141 96 l8 18 -15 16 M168 98 l-3 19 18 13 M153 150 l-7 -15 13 -18" stroke="#ff55c9"/>
+ <path d="M130 119 l17 7 8 -12 20 1 M158 91 l10 13 19 2 M177 145 l-8 -12 18 -10" stroke="#f7e85a"/>
+</g>
+<g fill="#fff" filter="url(#glow)"><circle cx="149" cy="114" r="4"/><circle cx="171" cy="117" r="4"/><circle cx="158" cy="139" r="4"/><circle cx="188" cy="128" r="3"/></g>
+<g fill="none" stroke-width="3" stroke-linecap="round" filter="url(#glow)">
+ <path d="M65 90 H24 M63 118 H15 M63 146 H29 M68 174 H20 M91 210 H39" stroke="#22eaff"/>
+ <path d="M69 102 H36 M67 132 H22 M74 160 H38 M83 192 H25" stroke="#ff4fc8"/>
+ <path d="M90 230 H44 M90 244 H29" stroke="#b7ff42"/>
+</g>
+<g fill="#f5c8ff" stroke="#8d3dff" stroke-width="2"><circle cx="24" cy="90" r="4"/><circle cx="15" cy="118" r="4"/><circle cx="29" cy="146" r="4"/><circle cx="20" cy="174" r="4"/><circle cx="39" cy="210" r="4"/></g>
+</svg>
