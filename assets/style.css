@@ -421,7 +421,7 @@ body{
 @media (max-width:700px), (pointer:coarse) {
   .mobile-3d-toggle {
     display:inline-flex; align-items:center; justify-content:center;
-    position:fixed; right:14px; bottom:calc(14px + env(safe-area-inset-bottom));
+    position:fixed; left:14px; right:auto; bottom:calc(14px + env(safe-area-inset-bottom));
     z-index:9999; min-width:92px; min-height:42px; padding:10px 15px;
     border:1px solid rgba(197,255,85,.55); border-radius:999px;
     background:rgba(12,10,24,.94); color:#c5ff55;
