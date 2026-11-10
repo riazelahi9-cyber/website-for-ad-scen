@@ -71,6 +71,53 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  // Distinct motion language for each page template
+  const pagePath = window.location.pathname.toLowerCase();
+  let pageType = "legal";
+  if (pagePath === "/" || pagePath.endsWith("/index.html") && !pagePath.includes("/blog/")) pageType = "home";
+  else if (pagePath.endsWith("/services.html")) pageType = "services";
+  else if (pagePath.endsWith("/about.html")) pageType = "about";
+  else if (pagePath.endsWith("/contact.html")) pageType = "contact";
+  else if (pagePath.endsWith("/blog/index.html")) pageType = "blog-index";
+  else if (pagePath.includes("/blog/")) pageType = "blog-article";
+  document.body.classList.add("page-motion-" + pageType);
+
+  const motionGroups = {
+    services: document.querySelectorAll(".service-card, .process-step"),
+    about: document.querySelectorAll(".process-step, .feature-panel, .work-grid > div"),
+    contact: document.querySelectorAll(".work-grid > div, #inquiry .section-head, #inquiry .feature-panel"),
+    "blog-index": document.querySelectorAll(".blog-card, .blog-bottom-note"),
+    "blog-article": document.querySelectorAll(".prose > h2, .prose > p, .prose > ul, .prose > .callout"),
+    legal: document.querySelectorAll(".prose > h2, .prose > p, .prose > ul, .prose > .callout")
+  };
+  const pageMotionItems = motionGroups[pageType] || [];
+  pageMotionItems.forEach(function (item, index) {
+    item.classList.add("page-motion-item");
+    item.style.setProperty("--motion-order", index);
+  });
+  if (pageType === "services") document.querySelectorAll(".service-card").forEach((item, index) => item.style.setProperty("--card-order", index));
+  if (pageType === "blog-index") document.querySelectorAll(".blog-card").forEach((item, index) => item.style.setProperty("--card-order", index));
+
+  if (pageMotionItems.length) {
+    if ("IntersectionObserver" in window && !reducedMotion) {
+      const pageObserver = new IntersectionObserver(function(entries, observer) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("page-motion-in");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.14, rootMargin: "0px 0px -35px 0px" });
+      pageMotionItems.forEach(function(item) { pageObserver.observe(item); });
+    } else {
+      pageMotionItems.forEach(function(item) { item.classList.add("page-motion-in"); });
+    }
+  }
+  if (pageType !== "home") {
+    const pageTitle = document.querySelector(".page-hero h1");
+    if (pageTitle && !reducedMotion) pageTitle.classList.add("page-title-arrive");
+  }
+
   // Site-wide soft spotlight that follows the mouse pointer
   if (window.matchMedia("(pointer:fine)").matches &&
       !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
