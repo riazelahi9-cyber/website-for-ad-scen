@@ -48,4 +48,25 @@ document.addEventListener("DOMContentLoaded", function () {
       orb.style.marginTop = "0";
     });
   }
+
+  // Site-wide soft spotlight that follows the mouse pointer
+  if (window.matchMedia("(pointer:fine)").matches &&
+      !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    const cursorGlow = document.createElement("div");
+    cursorGlow.className = "cursor-glow";
+    cursorGlow.setAttribute("aria-hidden", "true");
+    document.body.appendChild(cursorGlow);
+
+    window.addEventListener("pointermove", function (event) {
+      cursorGlow.style.left = event.clientX + "px";
+      cursorGlow.style.top = event.clientY + "px";
+    }, { passive: true });
+
+    window.addEventListener("pointerleave", function () {
+      cursorGlow.style.opacity = "0";
+    });
+    window.addEventListener("pointerenter", function () {
+      cursorGlow.style.opacity = ".72";
+    });
+  }
 });
