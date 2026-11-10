@@ -160,3 +160,19 @@
  .logo-wordmark{font-size:1.12rem}
  .logo-wordmark small{font-size:.39rem}
 }
+
+/* SITE-WIDE INTERACTIVE 3D EXPERIENCE */
+:root{--depth-purple:rgba(154,82,255,.24);--depth-cyan:rgba(53,220,255,.13)}
+.has-3d-interaction{transform-style:preserve-3d;will-change:transform;transition:transform .22s ease-out,box-shadow .3s ease,border-color .3s ease}
+.has-3d-interaction:hover{transform:perspective(1100px) rotateX(var(--tilt-x,0deg)) rotateY(var(--tilt-y,0deg)) translateY(-4px);box-shadow:0 24px 55px rgba(0,0,0,.32),0 0 0 1px rgba(173,112,255,.14),0 0 35px var(--depth-purple)}
+.service-card.has-3d-interaction:hover,.work-card.has-3d-interaction:hover,.blog-card.has-3d-interaction:hover,.feature-panel.has-3d-interaction:hover,.process-step.has-3d-interaction:hover,.insight-card.has-3d-interaction:hover{border-color:rgba(174,116,255,.48)}
+.service-card>* ,.work-card>* ,.blog-card>* ,.feature-panel>* ,.process-step>* ,.insight-card>*{transform:translateZ(12px)}
+.btn,.nav-cta{transform:translate(var(--magnet-x,0px),var(--magnet-y,0px));transition:transform .18s ease,box-shadow .25s ease,background .25s ease}
+.btn:hover,.nav-cta:hover{box-shadow:0 10px 30px rgba(151,75,255,.22)}
+.reading-progress{position:fixed;inset:0 auto auto 0;width:100%;height:3px;z-index:100;background:linear-gradient(90deg,#a855f7,#ec65ed,#46dcff);transform:scaleX(0);transform-origin:left;pointer-events:none;box-shadow:0 0 14px rgba(173,82,255,.7)}
+.hero-3d{isolation:isolate}
+.hero-3d .hero-glow{transition:translate .35s ease-out}
+.hero-3d .orbit,.hero-3d .float-label{transition:translate .35s ease-out}
+.service-card,.work-card,.blog-card,.feature-panel,.process-step,.insight-card{backface-visibility:hidden}
+@media(hover:none),(pointer:coarse){.has-3d-interaction{will-change:auto}.has-3d-interaction:hover{transform:none;box-shadow:none}.btn,.nav-cta{transform:none}}
+@media(prefers-reduced-motion:reduce){.has-3d-interaction,.hero-3d .hero-glow,.hero-3d .orbit,.hero-3d .float-label,.btn,.nav-cta{transition:none!important;transform:none!important}.reading-progress{display:none}}
