@@ -83,3 +83,50 @@
 @keyframes pointerTravel{0%{left:0;opacity:0;transform:translate3d(-2px,-50%,0) scale(.75)}7%{opacity:1}92%{opacity:1}100%{left:calc(100% - 19px);opacity:0;transform:translate3d(0,-50%,0) scale(1)}}
 @media(max-width:700px){.typing-pointer{width:15px;height:15px}.typing-pointer-violet{width:13px;height:13px}.typing-pointer-white{width:11px;height:11px}}
 @media(prefers-reduced-motion:reduce){.pointer-typing{clip-path:none;animation:none}.typing-pointer{display:none}}
+
+
+
+/* Individual page motion identities */
+.page-title-arrive{animation:pageTitleArrive .9s cubic-bezier(.18,.75,.25,1) both}
+@keyframes pageTitleArrive{from{opacity:0;transform:translateY(28px) skewY(2deg);filter:blur(7px)}to{opacity:1;transform:translateY(0) skewY(0);filter:blur(0)}}
+.page-motion-item{opacity:0;will-change:transform,opacity}
+.page-motion-item.page-motion-in{opacity:1}
+
+/* Services: cards lift and rotate into place like a portfolio deck */
+.page-motion-services .service-card.page-motion-item{transform:perspective(900px) rotateX(9deg) translateY(38px) scale(.97);transition:opacity .75s ease,transform .85s cubic-bezier(.2,.8,.2,1);transition-delay:calc(var(--card-order,0) * 90ms)}
+.page-motion-services .service-card.page-motion-in{transform:perspective(900px) rotateX(0) translateY(0) scale(1)}
+.page-motion-services .process-step.page-motion-item{transform:translateX(42px);transition:opacity .65s ease,transform .7s cubic-bezier(.2,.8,.2,1)}
+.page-motion-services .process-step.page-motion-in{transform:translateX(0)}
+.page-motion-services .service-card:hover{transform:translateY(-8px) rotateX(0) scale(1.015)}
+
+/* About: principles travel in from alternating sides; panels gain a soft frame */
+.page-motion-about .process-step.page-motion-item:nth-child(odd){transform:translateX(-48px) scale(.98)}
+.page-motion-about .process-step.page-motion-item:nth-child(even){transform:translateX(48px) scale(.98)}
+.page-motion-about .process-step.page-motion-in{transform:translateX(0) scale(1)}
+.page-motion-about .process-step{transition:opacity .7s ease,transform .8s cubic-bezier(.2,.8,.2,1)}
+.page-motion-about .feature-panel.page-motion-item{transform:perspective(800px) rotateY(-8deg) translateY(25px);transition:opacity .8s ease,transform .9s ease,box-shadow .3s}
+.page-motion-about .feature-panel.page-motion-in{transform:perspective(800px) rotateY(0) translateY(0);box-shadow:0 18px 55px #0003}
+
+/* Contact: contact choices slide in, inquiry panel gets a moving accent */
+.page-motion-contact .work-grid>div:first-child .feature-panel.page-motion-item{transform:translateX(-36px);transition:opacity .7s ease,transform .8s cubic-bezier(.2,.8,.2,1)}
+.page-motion-contact .work-grid>div:first-child .feature-panel.page-motion-in{transform:translateX(0)}
+.page-motion-contact .work-grid>div:last-child.page-motion-item{transform:translateX(38px);transition:opacity .8s ease,transform .8s ease}
+.page-motion-contact .work-grid>div:last-child.page-motion-in{transform:translateX(0)}
+.page-motion-contact #inquiry .feature-panel{position:relative}
+.page-motion-contact #inquiry .feature-panel:before{content:"";position:absolute;inset:0 auto 0 0;width:2px;background:linear-gradient(transparent,#b8ff4a,#a78bfa,transparent);transform:scaleY(0);transform-origin:top;transition:transform 1.2s ease}
+.page-motion-contact #inquiry .feature-panel.page-motion-in:before{transform:scaleY(1)}
+
+/* Blog library: cards rise in sequence with a subtle 3D tilt */
+.page-motion-blog-index .blog-card.page-motion-item{transform:perspective(1000px) rotateY(8deg) translateY(35px) scale(.97);transition:opacity .8s ease,transform .9s cubic-bezier(.2,.8,.2,1);transition-delay:calc(var(--card-order,0) * 100ms)}
+.page-motion-blog-index .blog-card:nth-child(even).page-motion-item{transform:perspective(1000px) rotateY(-8deg) translateY(35px) scale(.97)}
+.page-motion-blog-index .blog-card.page-motion-in,.page-motion-blog-index .blog-card:nth-child(even).page-motion-in{transform:perspective(1000px) rotateY(0) translateY(0) scale(1)}
+.page-motion-blog-index .blog-card-art{background-size:120% 120%;transition:background-size 1.2s ease}
+.page-motion-blog-index .blog-card:hover .blog-card-art{background-size:100% 100%}
+
+/* Blog articles and legal pages: editorial reading rhythm */
+.page-motion-blog-article .prose h2.page-motion-item,.page-motion-legal .prose h2.page-motion-item{transform:translateX(-24px);transition:opacity .65s ease,transform .7s ease}
+.page-motion-blog-article .prose h2.page-motion-in,.page-motion-legal .prose h2.page-motion-in{transform:translateX(0)}
+.page-motion-blog-article .prose p.page-motion-item,.page-motion-blog-article .prose ul.page-motion-item,.page-motion-legal .prose p.page-motion-item,.page-motion-legal .prose ul.page-motion-item,.page-motion-blog-article .prose .callout.page-motion-item,.page-motion-legal .prose .callout.page-motion-item{transform:translateY(18px);transition:opacity .7s ease,transform .75s ease}
+.page-motion-blog-article .prose p.page-motion-in,.page-motion-blog-article .prose ul.page-motion-in,.page-motion-legal .prose p.page-motion-in,.page-motion-legal .prose ul.page-motion-in,.page-motion-blog-article .prose .callout.page-motion-in,.page-motion-legal .prose .callout.page-motion-in{transform:translateY(0)}
+@media(max-width:700px){.page-motion-services .service-card.page-motion-item,.page-motion-blog-index .blog-card.page-motion-item,.page-motion-blog-index .blog-card:nth-child(even).page-motion-item{transform:translateY(28px) scale(.98)}.page-motion-services .service-card.page-motion-in,.page-motion-blog-index .blog-card.page-motion-in,.page-motion-blog-index .blog-card:nth-child(even).page-motion-in{transform:translateY(0) scale(1)}}
+@media(prefers-reduced-motion:reduce){.page-title-arrive{animation:none}.page-motion-item,.page-motion-services .service-card.page-motion-item,.page-motion-services .process-step.page-motion-item,.page-motion-about .process-step.page-motion-item,.page-motion-about .feature-panel.page-motion-item,.page-motion-contact .work-grid>div:first-child .feature-panel.page-motion-item,.page-motion-contact .work-grid>div:last-child.page-motion-item,.page-motion-blog-index .blog-card.page-motion-item,.page-motion-blog-index .blog-card:nth-child(even).page-motion-item{opacity:1;transform:none;transition:none}}
