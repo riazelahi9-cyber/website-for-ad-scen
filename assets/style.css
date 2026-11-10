@@ -140,3 +140,23 @@
 .logo-wordmark small{margin-top:6px;font:600 .48rem/1 var(--font);letter-spacing:.16em;color:#aaa0c4}
 .footer-logo>img{width:54px;height:54px}
 @media(max-width:620px){.logo-lockup{gap:7px}.logo-lockup>img{width:46px;height:46px}.logo-wordmark{font-size:1.02rem}.logo-wordmark small{font-size:.42rem}}
+
+/* Brand lockup refinement: stronger logo presence at every viewport */
+.logo-lockup{gap:13px;min-height:76px}
+.logo-lockup>img{width:76px;height:76px;filter:drop-shadow(0 0 12px #9b35ff9c) drop-shadow(0 0 24px #6d28d966)}
+.logo-wordmark{font-size:1.48rem;line-height:.98;letter-spacing:-.06em}
+.logo-wordmark small{font-size:.53rem;letter-spacing:.18em;margin-top:8px;color:#c4b8db}
+.footer-logo>img{width:68px;height:68px}
+@media(max-width:700px){
+ .nav{min-height:82px}
+ .logo-lockup{gap:9px;min-height:70px}
+ .logo-lockup>img{width:64px;height:64px}
+ .logo-wordmark{font-size:1.25rem}
+ .logo-wordmark small{font-size:.46rem;letter-spacing:.14em;margin-top:7px}
+}
+@media(max-width:360px){
+ .logo-lockup{gap:6px}
+ .logo-lockup>img{width:56px;height:56px}
+ .logo-wordmark{font-size:1.12rem}
+ .logo-wordmark small{font-size:.39rem}
+}
