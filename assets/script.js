@@ -2,7 +2,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   const mobilePerformanceMode = window.matchMedia("(max-width: 700px), (pointer: coarse)").matches;
   // Mobile 3D mode switch: OFF is the lightweight default; preference persists on this device.
-  if (mobilePerformanceMode) {
+  {
     const toggle = document.createElement("button");
     toggle.type = "button";
     toggle.className = "mobile-3d-toggle";
