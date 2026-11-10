@@ -17,19 +17,41 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  // Scroll-triggered typing with several visible pointer cursors
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function addTypingPointers(container) {
+    if (reducedMotion || container.dataset.pointerTyping === "done") return;
+    const targets = container.querySelectorAll("h1, h2, h3");
+    targets.forEach(function (target) {
+      if (target.dataset.pointerTyping === "done") return;
+      target.dataset.pointerTyping = "done";
+      target.classList.add("pointer-typing");
+      ["lime", "violet", "white"].forEach(function (tone, index) {
+        const pointer = document.createElement("span");
+        pointer.className = "typing-pointer typing-pointer-" + tone;
+        pointer.setAttribute("aria-hidden", "true");
+        pointer.innerHTML = '<svg viewBox="0 0 24 24" focusable="false"><path d="M4 2.5 20.5 13l-7.1 1.2-3.6 6.3L4 2.5Z" fill="currentColor" stroke="#08090d" stroke-width="1.2" stroke-linejoin="round"/></svg>';
+        pointer.style.setProperty("--pointer-delay", (index * 0.16) + "s");
+        target.appendChild(pointer);
+      });
+    });
+    container.dataset.pointerTyping = "done";
+  }
+
   const revealItems = document.querySelectorAll(".reveal");
   if ("IntersectionObserver" in window && revealItems.length) {
     const observer = new IntersectionObserver(function (entries, currentObserver) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
           entry.target.classList.add("is-visible");
+          addTypingPointers(entry.target);
           currentObserver.unobserve(entry.target);
         }
       });
     }, { threshold: 0.12 });
     revealItems.forEach(function (item) { observer.observe(item); });
   } else {
-    revealItems.forEach(function (item) { item.classList.add("is-visible"); });
+    revealItems.forEach(function (item) { item.classList.add("is-visible"); addTypingPointers(item); });
   }
 
   const visual = document.querySelector(".hero-visual");
