@@ -1,6 +1,28 @@
 // RIAZ IDEAS — navigation, scroll reveals and subtle 3D pointer movement
 document.addEventListener("DOMContentLoaded", function () {
   const mobilePerformanceMode = window.matchMedia("(max-width: 700px), (pointer: coarse)").matches;
+  // Mobile 3D mode switch: OFF is the lightweight default; preference persists on this device.
+  if (mobilePerformanceMode) {
+    const toggle = document.createElement("button");
+    toggle.type = "button";
+    toggle.className = "mobile-3d-toggle";
+    toggle.setAttribute("aria-label", "Toggle mobile 3D effects");
+    toggle.setAttribute("aria-pressed", "false");
+    const savedMode = localStorage.getItem("riaz-mobile-3d") === "on";
+    function setMobile3D(enabled) {
+      document.body.classList.toggle("mobile-3d-enabled", enabled);
+      toggle.setAttribute("aria-pressed", String(enabled));
+      toggle.textContent = enabled ? "3D: ON" : "3D: OFF";
+      toggle.classList.toggle("is-on", enabled);
+      localStorage.setItem("riaz-mobile-3d", enabled ? "on" : "off");
+    }
+    toggle.addEventListener("click", function () {
+      setMobile3D(!document.body.classList.contains("mobile-3d-enabled"));
+    });
+    document.body.appendChild(toggle);
+    setMobile3D(savedMode);
+  }
+
   const menuButton = document.querySelector(".menu");
   const navigation = document.getElementById("nav");
 
