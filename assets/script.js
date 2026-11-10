@@ -149,7 +149,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const rect = card.getBoundingClientRect();
         const px = (event.clientX - rect.left) / rect.width;
         const py = (event.clientY - rect.top) / rect.height;
-        const max = card.classList.contains("hero-visual") ? 5 : 3.5;
+        const max = card.classList.contains("hero-visual") ? 9 : 11;
         card.style.setProperty("--tilt-x", ((.5 - py) * max) + "deg");
         card.style.setProperty("--tilt-y", ((px - .5) * max) + "deg");
         card.style.setProperty("--shine-x", (px * 100) + "%");
