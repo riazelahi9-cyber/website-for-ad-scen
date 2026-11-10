@@ -130,3 +130,13 @@
 .page-motion-blog-article .prose p.page-motion-in,.page-motion-blog-article .prose ul.page-motion-in,.page-motion-legal .prose p.page-motion-in,.page-motion-legal .prose ul.page-motion-in,.page-motion-blog-article .prose .callout.page-motion-in,.page-motion-legal .prose .callout.page-motion-in{transform:translateY(0)}
 @media(max-width:700px){.page-motion-services .service-card.page-motion-item,.page-motion-blog-index .blog-card.page-motion-item,.page-motion-blog-index .blog-card:nth-child(even).page-motion-item{transform:translateY(28px) scale(.98)}.page-motion-services .service-card.page-motion-in,.page-motion-blog-index .blog-card.page-motion-in,.page-motion-blog-index .blog-card:nth-child(even).page-motion-in{transform:translateY(0) scale(1)}}
 @media(prefers-reduced-motion:reduce){.page-title-arrive{animation:none}.page-motion-item,.page-motion-services .service-card.page-motion-item,.page-motion-services .process-step.page-motion-item,.page-motion-about .process-step.page-motion-item,.page-motion-about .feature-panel.page-motion-item,.page-motion-contact .work-grid>div:first-child .feature-panel.page-motion-item,.page-motion-contact .work-grid>div:last-child.page-motion-item,.page-motion-blog-index .blog-card.page-motion-item,.page-motion-blog-index .blog-card:nth-child(even).page-motion-item{opacity:1;transform:none;transition:none}}
+
+/* RIAZ IDEAS neural-circuit brand lockup */
+.logo-lockup{display:inline-flex;align-items:center;gap:10px;letter-spacing:normal;white-space:nowrap;flex-shrink:0}
+.logo-lockup>img{display:block;width:58px;height:58px;object-fit:contain;filter:drop-shadow(0 0 9px #9b35ff88);transition:transform .35s ease,filter .35s ease}
+.logo-lockup:hover>img{transform:translateY(-2px) rotate(-4deg) scale(1.06);filter:drop-shadow(0 0 14px #b34cff)}
+.logo-wordmark{display:flex;flex-direction:column;font:700 1.18rem/.95 var(--display);letter-spacing:-.055em;color:#f4f1ff}
+.logo-wordmark>span{display:inline;color:#c084fc;background:linear-gradient(100deg,#e8c9ff,#a855f7 55%,#6d5cff);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.logo-wordmark small{margin-top:6px;font:600 .48rem/1 var(--font);letter-spacing:.16em;color:#aaa0c4}
+.footer-logo>img{width:54px;height:54px}
+@media(max-width:620px){.logo-lockup{gap:7px}.logo-lockup>img{width:46px;height:46px}.logo-wordmark{font-size:1.02rem}.logo-wordmark small{font-size:.42rem}}
