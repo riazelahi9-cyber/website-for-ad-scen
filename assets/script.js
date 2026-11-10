@@ -138,4 +138,82 @@ document.addEventListener("DOMContentLoaded", function () {
       cursorGlow.style.opacity = ".72";
     });
   }
+  // Interactive 3D layer: restrained tilt, magnetic controls and scroll depth
+  if (!reducedMotion && window.matchMedia("(pointer:fine)").matches) {
+    const tiltTargets = document.querySelectorAll(
+      ".service-card, .work-card, .blog-card, .feature-panel, .process-step, .insight-card, .cta-inner, .hero-visual"
+    );
+    tiltTargets.forEach(function (card) {
+      card.classList.add("has-3d-interaction");
+      card.addEventListener("pointermove", function (event) {
+        const rect = card.getBoundingClientRect();
+        const px = (event.clientX - rect.left) / rect.width;
+        const py = (event.clientY - rect.top) / rect.height;
+        const max = card.classList.contains("hero-visual") ? 5 : 3.5;
+        card.style.setProperty("--tilt-x", ((.5 - py) * max) + "deg");
+        card.style.setProperty("--tilt-y", ((px - .5) * max) + "deg");
+        card.style.setProperty("--shine-x", (px * 100) + "%");
+        card.style.setProperty("--shine-y", (py * 100) + "%");
+      }, { passive: true });
+      card.addEventListener("pointerleave", function () {
+        card.style.setProperty("--tilt-x", "0deg");
+        card.style.setProperty("--tilt-y", "0deg");
+        card.style.setProperty("--shine-x", "50%");
+        card.style.setProperty("--shine-y", "50%");
+      });
+    });
+
+    document.querySelectorAll(".btn, .nav-cta").forEach(function (button) {
+      button.addEventListener("pointermove", function (event) {
+        const rect = button.getBoundingClientRect();
+        const dx = (event.clientX - rect.left - rect.width / 2) * .07;
+        const dy = (event.clientY - rect.top - rect.height / 2) * .10;
+        button.style.setProperty("--magnet-x", dx + "px");
+        button.style.setProperty("--magnet-y", dy + "px");
+      }, { passive: true });
+      button.addEventListener("pointerleave", function () {
+        button.style.setProperty("--magnet-x", "0px");
+        button.style.setProperty("--magnet-y", "0px");
+      });
+    });
+  }
+
+  // Reading progress line, useful on long pages without distracting motion
+  const progress = document.createElement("div");
+  progress.className = "reading-progress";
+  progress.setAttribute("aria-hidden", "true");
+  document.body.appendChild(progress);
+  let progressQueued = false;
+  function updateReadingProgress() {
+    const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+    const amount = scrollable > 0 ? (window.scrollY / scrollable) * 100 : 0;
+    progress.style.transform = "scaleX(" + Math.min(100, Math.max(0, amount)) / 100 + ")";
+    progressQueued = false;
+  }
+  window.addEventListener("scroll", function () {
+    if (!progressQueued) {
+      progressQueued = true;
+      window.requestAnimationFrame(updateReadingProgress);
+    }
+  }, { passive: true });
+  updateReadingProgress();
+
+  // Gentle depth parallax for ambient hero elements
+  const heroSection = document.querySelector(".hero-3d");
+  if (heroSection && !reducedMotion && window.matchMedia("(pointer:fine)").matches) {
+    const layers = heroSection.querySelectorAll(".hero-glow, .orbit, .float-label");
+    heroSection.addEventListener("pointermove", function (event) {
+      const rect = heroSection.getBoundingClientRect();
+      const x = (event.clientX - rect.left) / rect.width - .5;
+      const y = (event.clientY - rect.top) / rect.height - .5;
+      layers.forEach(function (layer, index) {
+        const depth = (index + 1) * 3;
+        layer.style.translate = (x * depth) + "px " + (y * depth) + "px";
+      });
+    }, { passive: true });
+    heroSection.addEventListener("pointerleave", function () {
+      layers.forEach(function (layer) { layer.style.translate = "0 0"; });
+    });
+  }
+
 });
