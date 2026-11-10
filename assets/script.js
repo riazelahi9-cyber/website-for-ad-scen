@@ -1,5 +1,6 @@
 // RIAZ IDEAS — navigation, scroll reveals and subtle 3D pointer movement
 document.addEventListener("DOMContentLoaded", function () {
+  const mobilePerformanceMode = window.matchMedia("(max-width: 700px), (pointer: coarse)").matches;
   const menuButton = document.querySelector(".menu");
   const navigation = document.getElementById("nav");
 
@@ -20,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Scroll-triggered typing with several visible pointer cursors
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   function addTypingPointers(container) {
-    if (reducedMotion || container.dataset.pointerTyping === "done") return;
+    if (reducedMotion || mobilePerformanceMode || container.dataset.pointerTyping === "done") return;
     const targets = container.querySelectorAll("h1, h2, h3");
     targets.forEach(function (target) {
       if (target.dataset.pointerTyping === "done") return;
@@ -39,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   const revealItems = document.querySelectorAll(".reveal");
-  if ("IntersectionObserver" in window && revealItems.length) {
+  if (!mobilePerformanceMode && "IntersectionObserver" in window && revealItems.length) {
     const observer = new IntersectionObserver(function (entries, currentObserver) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
@@ -90,7 +91,7 @@ document.addEventListener("DOMContentLoaded", function () {
     "blog-article": document.querySelectorAll(".prose > h2, .prose > p, .prose > ul, .prose > .callout"),
     legal: document.querySelectorAll(".prose > h2, .prose > p, .prose > ul, .prose > .callout")
   };
-  const pageMotionItems = motionGroups[pageType] || [];
+  const pageMotionItems = mobilePerformanceMode ? [] : (motionGroups[pageType] || []);
   pageMotionItems.forEach(function (item, index) {
     item.classList.add("page-motion-item");
     item.style.setProperty("--motion-order", index);
@@ -115,7 +116,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   if (pageType !== "home") {
     const pageTitle = document.querySelector(".page-hero h1");
-    if (pageTitle && !reducedMotion) pageTitle.classList.add("page-title-arrive");
+    if (pageTitle && !reducedMotion && !mobilePerformanceMode) pageTitle.classList.add("page-title-arrive");
   }
 
   // Site-wide soft spotlight that follows the mouse pointer
@@ -178,25 +179,28 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Reading progress line, useful on long pages without distracting motion
-  const progress = document.createElement("div");
-  progress.className = "reading-progress";
-  progress.setAttribute("aria-hidden", "true");
-  document.body.appendChild(progress);
-  let progressQueued = false;
-  function updateReadingProgress() {
-    const scrollable = document.documentElement.scrollHeight - window.innerHeight;
-    const amount = scrollable > 0 ? (window.scrollY / scrollable) * 100 : 0;
-    progress.style.transform = "scaleX(" + Math.min(100, Math.max(0, amount)) / 100 + ")";
-    progressQueued = false;
-  }
-  window.addEventListener("scroll", function () {
-    if (!progressQueued) {
-      progressQueued = true;
-      window.requestAnimationFrame(updateReadingProgress);
+  // Reading progress is desktop-only; avoid a scroll listener on mobile.
+  if (!mobilePerformanceMode) {
+    const progress = document.createElement("div");
+    progress.className = "reading-progress";
+    progress.setAttribute("aria-hidden", "true");
+    document.body.appendChild(progress);
+    let progressQueued = false;
+    function updateReadingProgress() {
+      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      const amount = scrollable > 0 ? (window.scrollY / scrollable) * 100 : 0;
+      progress.style.transform = "scaleX(" + Math.min(100, Math.max(0, amount)) / 100 + ")";
+      progressQueued = false;
     }
-  }, { passive: true });
-  updateReadingProgress();
+    window.addEventListener("scroll", function () {
+      if (!progressQueued) {
+        progressQueued = true;
+        window.requestAnimationFrame(updateReadingProgress);
+      }
+    }, { passive: true });
+    updateReadingProgress();
+  }
+
 
   // Gentle depth parallax for ambient hero elements
   const heroSection = document.querySelector(".hero-3d");

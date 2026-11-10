@@ -389,3 +389,28 @@ body{
  .hero h1 .gradient-text,.marquee-track,.hero-float-card{animation:none!important}
  .has-3d-interaction,.has-3d-interaction:hover{transform:none!important;transition:none!important}
 }
+
+
+/* MOBILE PERFORMANCE PASS — keep the desktop 3D art direction unchanged */
+@media (max-width: 700px), (pointer: coarse) {
+  html { scroll-behavior: auto; }
+  .site-noise { display: none; }
+  .site-header, header { -webkit-backdrop-filter: none !important; backdrop-filter: none !important; box-shadow: none !important; }
+  .hero-3d:before { display: none; }
+  .hero-visual { filter: none !important; }
+  .visual-grid { opacity: .28; filter: none !important; }
+  .hero-glow { filter: none !important; opacity: .35; }
+  .orb { animation: none !important; box-shadow: inset -18px -16px 28px #000, inset 8px 7px 18px #ffffff44, 0 0 34px #9b55ff30; }
+  .orb-shine, .orb-core { filter: none !important; opacity: .12; }
+  .orbit { filter: none !important; box-shadow: none !important; }
+  .float-label, .hero-float-card { -webkit-backdrop-filter: none !important; backdrop-filter: none !important; box-shadow: 0 8px 18px #0005 !important; }
+  .hero-float-card { animation: none !important; }
+  .gradient-text, .hero h1 .gradient-text { animation: none !important; background-size: auto !important; }
+  .marquee-track { animation: none !important; }
+  .service-card:before { filter: none !important; }
+  .service-card, .feature-panel, .insight-card, .blog-card, .work-art { box-shadow: 0 8px 22px rgba(0,0,0,.16) !important; }
+  .reveal, .reveal.is-visible, .page-motion-item, .page-motion-item.page-motion-in { opacity: 1 !important; transform: none !important; filter: none !important; transition: none !important; animation: none !important; will-change: auto !important; }
+  .has-3d-interaction, .has-3d-interaction:hover { transform: none !important; transform-style: flat !important; transition: none !important; will-change: auto !important; box-shadow: inherit; }
+  .has-3d-interaction:after { display: none !important; }
+  .logo-lockup > img { filter: none !important; }
+}
