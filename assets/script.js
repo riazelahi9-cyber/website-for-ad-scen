@@ -1,37 +1,6 @@
 // RIAZ IDEAS — navigation, scroll reveals and subtle 3D pointer movement
 document.addEventListener("DOMContentLoaded", function () {
   const mobilePerformanceMode = window.matchMedia("(max-width: 700px), (pointer: coarse)").matches;
-  // Mobile 3D mode switch: OFF is the lightweight default; preference persists when storage is available.
-  if (mobilePerformanceMode) {
-    const toggle = document.createElement("button");
-    toggle.type = "button";
-    toggle.className = "mobile-3d-toggle";
-    toggle.setAttribute("aria-label", "Toggle mobile 3D effects");
-    toggle.setAttribute("aria-pressed", "false");
-
-    // Append first so the control remains visible even if browser storage is restricted.
-    document.body.appendChild(toggle);
-
-    let savedMode = false;
-    try {
-      savedMode = localStorage.getItem("riaz-mobile-3d") === "on";
-    } catch (error) {}
-
-    function setMobile3D(enabled) {
-      document.body.classList.toggle("mobile-3d-enabled", enabled);
-      toggle.setAttribute("aria-pressed", String(enabled));
-      toggle.textContent = enabled ? "3D: ON" : "3D: OFF";
-      toggle.classList.toggle("is-on", enabled);
-      try {
-        localStorage.setItem("riaz-mobile-3d", enabled ? "on" : "off");
-      } catch (error) {}
-    }
-    toggle.addEventListener("click", function () {
-      setMobile3D(!document.body.classList.contains("mobile-3d-enabled"));
-    });
-    setMobile3D(savedMode);
-  }
-
   const menuButton = document.querySelector(".menu");
   const navigation = document.getElementById("nav");
 
@@ -170,46 +139,6 @@ document.addEventListener("DOMContentLoaded", function () {
       cursorGlow.style.opacity = ".72";
     });
   }
-  // Interactive 3D layer: restrained tilt, magnetic controls and scroll depth
-  if (!reducedMotion && window.matchMedia("(pointer:fine)").matches) {
-    const tiltTargets = document.querySelectorAll(
-      ".service-card, .work-card, .blog-card, .feature-panel, .process-step, .insight-card, .cta-inner, .hero-visual"
-    );
-    tiltTargets.forEach(function (card) {
-      card.classList.add("has-3d-interaction");
-      card.addEventListener("pointermove", function (event) {
-        const rect = card.getBoundingClientRect();
-        const px = (event.clientX - rect.left) / rect.width;
-        const py = (event.clientY - rect.top) / rect.height;
-        const max = card.classList.contains("hero-visual") ? 9 : 11;
-        card.style.setProperty("--tilt-x", ((.5 - py) * max) + "deg");
-        card.style.setProperty("--tilt-y", ((px - .5) * max) + "deg");
-        card.style.setProperty("--shine-x", (px * 100) + "%");
-        card.style.setProperty("--shine-y", (py * 100) + "%");
-      }, { passive: true });
-      card.addEventListener("pointerleave", function () {
-        card.style.setProperty("--tilt-x", "0deg");
-        card.style.setProperty("--tilt-y", "0deg");
-        card.style.setProperty("--shine-x", "50%");
-        card.style.setProperty("--shine-y", "50%");
-      });
-    });
-
-    document.querySelectorAll(".btn, .nav-cta").forEach(function (button) {
-      button.addEventListener("pointermove", function (event) {
-        const rect = button.getBoundingClientRect();
-        const dx = (event.clientX - rect.left - rect.width / 2) * .07;
-        const dy = (event.clientY - rect.top - rect.height / 2) * .10;
-        button.style.setProperty("--magnet-x", dx + "px");
-        button.style.setProperty("--magnet-y", dy + "px");
-      }, { passive: true });
-      button.addEventListener("pointerleave", function () {
-        button.style.setProperty("--magnet-x", "0px");
-        button.style.setProperty("--magnet-y", "0px");
-      });
-    });
-  }
-
   // Reading progress is desktop-only; avoid a scroll listener on mobile.
   if (!mobilePerformanceMode) {
     const progress = document.createElement("div");
