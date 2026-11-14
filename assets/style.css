@@ -181,7 +181,7 @@
 :root{
  --bg:#070610;--bg2:#0c0a18;--panel:#111020;--panel2:#19152b;
  --text:#f7f4ff;--muted:#aaa4bd;--line:rgba(205,177,255,.14);
- --accent:#c4ff4d;--accent2:#a56bff;--max:1240px;
+ --accent:#a56bff;--accent2:#35d9ff;--max:1240px;
 }
 body{
  background:
@@ -464,3 +464,28 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   .nav nav a { display: flex; align-items: center; min-height: 44px; }
 }
 #inquiry iframe { display: block; width: 100%; max-width: 100%; border: 0; }
+
+
+/* Customer-first polish: consistent purple/cyan identity, restrained motion */
+:root{--accent:#a56bff;--accent2:#35d9ff}
+.gradient-text{background-image:linear-gradient(100deg,#e7d4ff 0%,#a56bff 48%,#35d9ff 100%)}
+.eyebrow-dot,.label-dot,.proof-line{background:#35d9ff;box-shadow:0 0 14px #35d9ff88}
+.btn{background:linear-gradient(105deg,#a56bff,#35d9ff);border-color:transparent;color:#090812}
+.btn span{color:#090812}
+.nav-cta{border-color:#a56bff99;background:rgba(165,107,255,.08)}
+.service-card:hover,.insight-card:hover,.blog-card:hover{border-color:#35d9ff88}
+.service-icon,.service-symbol,.read-link,.tag,.text-link span,.footer-bottom b{color:#35d9ff}
+.hero-3d{background:radial-gradient(ellipse at 76% 44%,rgba(165,107,255,.18),transparent 38%),radial-gradient(ellipse at 78% 78%,rgba(53,217,255,.08),transparent 28%),#070610}
+.orb:after{border-color:#35d9ff99;box-shadow:0 0 24px #35d9ff30}
+.orbit-a{border-color:#35d9ff66}
+.orbit-b{border-color:#a56bff88}
+.hero-glow.glow-one{background:#a56bff28}
+.hero-glow.glow-two{background:#35d9ff18}
+.has-3d-interaction:hover{transform:none;box-shadow:none}
+.service-card>* ,.work-card>* ,.blog-card>* ,.feature-panel>* ,.process-step>* ,.insight-card>*{transform:none}
+.social-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.social-links a{display:inline-flex;align-items:center;gap:8px;min-height:42px;padding:8px 12px;border:1px solid var(--line);border-radius:999px;color:#e9e3f5;font-size:.82rem;font-weight:700;transition:border-color .2s,background .2s}
+.social-links a:hover{border-color:#35d9ff;background:rgba(53,217,255,.08);color:#fff}
+.social-links svg{width:17px;height:17px;display:block}
+@media(max-width:700px){.hero-visual{height:300px}.social-links a{min-height:44px}.logo-lockup>img{width:56px;height:56px}}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}}
