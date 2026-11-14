@@ -452,3 +452,15 @@ body{
   }
   body.mobile-3d-enabled .hero-visual { filter:drop-shadow(0 14px 35px rgba(129,68,255,.12)) !important; }
 }
+
+
+/* PHASE 3: keyboard focus and touch usability */
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible, iframe:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 4px;
+}
+@media (max-width: 700px) {
+  .menu { min-width: 44px; min-height: 44px; }
+  .nav nav a { display: flex; align-items: center; min-height: 44px; }
+}
+#inquiry iframe { display: block; width: 100%; max-width: 100%; border: 0; }
